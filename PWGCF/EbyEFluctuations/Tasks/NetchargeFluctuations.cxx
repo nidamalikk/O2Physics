@@ -38,7 +38,7 @@ using MyCollision = MyCollisions::iterator;
 using MyTracks = soa::Join<aod::Tracks, aod::TracksExtra, aod::TracksDCA, aod::TrackSelection>;
 using MyTrack = MyTracks::iterator;
 <<<<<<< HEAD
-}//// namespace o2::aod
+} //// namespace o2::aod
 =======
 }
 >>>>>>> 03c805b2635be6256d2a2a4ad4e9fa12fbdd067d
@@ -170,4 +170,3 @@ WorkflowSpec defineDataProcessing(ConfigContext const& cfgc)
   return workflow;
 >>>>>>> 03c805b2635be6256d2a2a4ad4e9fa12fbdd067d
 }
-
