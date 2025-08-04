@@ -266,7 +266,6 @@ struct NetchargeFluctuations {
     if (std::abs(coll.posZ()) > vertexZcut)
       return false;
 
-
     if constexpr (run == kRun3) {
       if (cSel8Trig && !coll.sel8()) {
         return false;
@@ -574,7 +573,6 @@ struct NetchargeFluctuations {
       return;
     histogramRegistry.fill(HIST("delta_eta/cent"), cent);
 
-
     int fpos = 0, fneg = 0, posneg = 0, termn = 0, termp = 0, nch = 0, nchCor = 0, nchTotal = 0;
     for (const auto& track : tracks) {
       nchTotal += 1;
@@ -587,41 +585,40 @@ struct NetchargeFluctuations {
       double weight = 1.0 / eff;
       nchCor += weight;
 
-    int fpos = 0, fneg = 0, posneg = 0, termn = 0, termp = 0;
-    for (const auto& track : tracks) {
-      if (!selTrack(track))
-        continue;
+      int fpos = 0, fneg = 0, posneg = 0, termn = 0, termp = 0;
+      for (const auto& track : tracks) {
+        if (!selTrack(track))
+          continue;
 
-      double eta = track.eta();
-      if (eta < deta1 || eta > deta2)
-        continue;
+        double eta = track.eta();
+        if (eta < deta1 || eta > deta2)
+          continue;
 
-      histogramRegistry.fill(HIST("delta_eta/track_eta"), eta);
+        histogramRegistry.fill(HIST("delta_eta/track_eta"), eta);
 
-      if (track.sign() == 1)
-        fpos++;
-      else if (track.sign() == -1)
-        fneg++;
+        if (track.sign() == 1)
+          fpos++;
+        else if (track.sign() == -1)
+          fneg++;
+      }
+      termp = fpos * (fpos - 1);
+      termn = fneg * (fneg - 1);
+      posneg = fpos * fneg;
+
+      float deltaEtaWidth = deta2 - deta1 + 1e-5f;
+
+      histogramRegistry.fill(HIST("delta_eta/nchTotal"), deltaEtaWidth, nchTotal);
+      histogramRegistry.fill(HIST("delta_eta/nch"), deltaEtaWidth, nch);
+      histogramRegistry.fill(HIST("delta_eta/nchCor"), deltaEtaWidth, nchCor);
+
+      histogramRegistry.fill(HIST("delta_eta/pos"), deltaEtaWidth, fpos);
+      histogramRegistry.fill(HIST("delta_eta/neg"), deltaEtaWidth, fneg);
+      histogramRegistry.fill(HIST("delta_eta/termp"), deltaEtaWidth, termp);
+      histogramRegistry.fill(HIST("delta_eta/termn"), deltaEtaWidth, termn);
+      histogramRegistry.fill(HIST("delta_eta/pos_sq"), deltaEtaWidth, fpos * fpos);
+      histogramRegistry.fill(HIST("delta_eta/neg_sq"), deltaEtaWidth, fneg * fneg);
+      histogramRegistry.fill(HIST("delta_eta/posneg"), deltaEtaWidth, posneg);
     }
-    termp = fpos * (fpos - 1);
-    termn = fneg * (fneg - 1);
-    posneg = fpos * fneg;
-
-    float deltaEtaWidth = deta2 - deta1 + 1e-5f;
-
-
-    histogramRegistry.fill(HIST("delta_eta/nchTotal"), deltaEtaWidth, nchTotal);
-    histogramRegistry.fill(HIST("delta_eta/nch"), deltaEtaWidth, nch);
-    histogramRegistry.fill(HIST("delta_eta/nchCor"), deltaEtaWidth, nchCor);
-
-    histogramRegistry.fill(HIST("delta_eta/pos"), deltaEtaWidth, fpos);
-    histogramRegistry.fill(HIST("delta_eta/neg"), deltaEtaWidth, fneg);
-    histogramRegistry.fill(HIST("delta_eta/termp"), deltaEtaWidth, termp);
-    histogramRegistry.fill(HIST("delta_eta/termn"), deltaEtaWidth, termn);
-    histogramRegistry.fill(HIST("delta_eta/pos_sq"), deltaEtaWidth, fpos * fpos);
-    histogramRegistry.fill(HIST("delta_eta/neg_sq"), deltaEtaWidth, fneg * fneg);
-    histogramRegistry.fill(HIST("delta_eta/posneg"), deltaEtaWidth, posneg);
-  }
 
   SliceCache cache;
   Preslice<aod::McParticles> mcTrack = o2::aod::mcparticle::mcCollisionId;
