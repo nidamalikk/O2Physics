@@ -45,7 +45,7 @@
 #include "TRandom3.h"
 
 #include <string>
-#include <vector> 
+#include <vector>
 
 using namespace o2;
 using namespace o2::framework;
@@ -88,10 +88,10 @@ struct NetchargeFluctuations {
   Configurable<double> threshold{"threshold", 1e-6, "Delta eta bin count"};
 
   // Event selections
-  Configurable<bool> cSel8Trig{"cSel8Trig", true, "Sel8 (T0A + T0C) Selection Run3"};                    // sel8
-  Configurable<bool> cInt7Trig{"cInt7Trig", true, "kINT7 MB Trigger"};                                   // kINT7
-  Configurable<bool> cSel7Trig{"cSel7Trig", true, "Sel7 (V0A + V0C) Selection Run2"};                    // sel7
-    Configurable<bool> cDcaXy{"cDcaXy", true, "Dca XY cut"};
+  Configurable<bool> cSel8Trig{"cSel8Trig", true, "Sel8 (T0A + T0C) Selection Run3"}; // sel8
+  Configurable<bool> cInt7Trig{"cInt7Trig", true, "kINT7 MB Trigger"};                // kINT7
+  Configurable<bool> cSel7Trig{"cSel7Trig", true, "Sel7 (V0A + V0C) Selection Run2"}; // sel7
+  Configurable<bool> cDcaXy{"cDcaXy", true, "Dca XY cut"};
   Configurable<bool> cDcaZ{"cDcaZ", true, "Dca Z cut"};
   Configurable<bool> cTpcCr{"cTpcCr", true, "tpc crossrows"};
   Configurable<bool> cItsChi{"cItsChi", true, "ITS chi"};
@@ -101,67 +101,67 @@ struct NetchargeFluctuations {
   ConfigurableAxis centBining{"centBining", {0, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100}, "Centrality/Multiplicity percentile bining"};
   Configurable<bool> cPileupReject{"cPileupReject", true, "Pileup rejection"};                          // pileup
   Configurable<bool> cfgUseGoodItsLayerAllCut{"cfgUseGoodItsLayerAllCut", true, "Good ITS Layers All"}; // pileup
-  Configurable<bool> cTFBorder{"cTFBorder", false, "Timeframe Border Selection"};        // pileup
-  Configurable<bool> cNoItsROBorder{"cNoItsROBorder", false, "No ITSRO Border Cut"};     // pileup
-  Configurable<bool> cItsTpcVtx{"cItsTpcVtx", true, "ITS+TPC Vertex Selection"};        // pileup
-  Configurable<bool> cZVtxTimeDiff{"cZVtxTimeDiff", false, "z-vtx time diff selection"}; // pileup
-  Configurable<bool> cPVcont{"cPVcont", true, "primary vertex contributor"}; 
+  Configurable<bool> cTFBorder{"cTFBorder", false, "Timeframe Border Selection"};                       // pileup
+  Configurable<bool> cNoItsROBorder{"cNoItsROBorder", false, "No ITSRO Border Cut"};                    // pileup
+  Configurable<bool> cItsTpcVtx{"cItsTpcVtx", true, "ITS+TPC Vertex Selection"};                        // pileup
+  Configurable<bool> cZVtxTimeDiff{"cZVtxTimeDiff", false, "z-vtx time diff selection"};                // pileup
+  Configurable<bool> cPVcont{"cPVcont", true, "primary vertex contributor"};
 
   O2_DEFINE_CONFIGURABLE(cfgEvSelMultCorrelation, bool, true, "Multiplicity correlation cut")
-struct : ConfigurableGroup {
+  struct : ConfigurableGroup {
 
-O2_DEFINE_CONFIGURABLE(cfgMultPVT0CCutEnabled, bool, true, "Enable PV multiplicity vs T0C centrality cut")
-O2_DEFINE_CONFIGURABLE(cfgMultGlobalFT0CCutEnabled, bool, true, "Enable globalTracks vs FT0C multiplicity cut")
-O2_DEFINE_CONFIGURABLE(cfgMultGlobalPVCutEnabled, bool, false, "Enable globalTracks vs PV multiplicity cut")
-	
- Configurable<std::vector<double>> cfgMultPVT0CCutPars{      "cfgMultPVT0CCutPars",
-      std::vector<double>{187.621, -5.14575, 0.0716601, -0.000586642, 2.02818e-06, 51.2929, -1.66644, 0.0354762, -0.000389809, 1.55365e-06},
-      "PV multiplicity vs T0C centrality cut parameter values"};
+    O2_DEFINE_CONFIGURABLE(cfgMultPVT0CCutEnabled, bool, true, "Enable PV multiplicity vs T0C centrality cut")
+    O2_DEFINE_CONFIGURABLE(cfgMultGlobalFT0CCutEnabled, bool, true, "Enable globalTracks vs FT0C multiplicity cut")
+    O2_DEFINE_CONFIGURABLE(cfgMultGlobalPVCutEnabled, bool, false, "Enable globalTracks vs PV multiplicity cut")
 
-Configurable<std::vector<double>> cfgMultGlobalFT0CCutPars{ "cfgMultGlobalFT0CCutPars",
-    std::vector<double>{135.561, -3.7818, 0.0536562, -0.000445155, 1.55429e-06, 38.2336, -1.2568, 0.0270932, -0.000301034, 1.21234e-06},
-    "globalTracks vs FT0C cut parameter values"};
+    Configurable<std::vector<double>> cfgMultPVT0CCutPars{"cfgMultPVT0CCutPars",
+                                                          std::vector<double>{187.621, -5.14575, 0.0716601, -0.000586642, 2.02818e-06, 51.2929, -1.66644, 0.0354762, -0.000389809, 1.55365e-06},
+                                                          "PV multiplicity vs T0C centrality cut parameter values"};
 
-Configurable<std::vector<double>> cfgMultGlobalPVCutPars{  "cfgMultGlobalPVCutPars",
-      std::vector<double>{100., -2., 0.05, -0.0003, 1e-06, 30., -1.0, 0.02, -0.0002, 8e-07}, 
-      "globalTracks vs PV cut parameter values"};
+    Configurable<std::vector<double>> cfgMultGlobalFT0CCutPars{"cfgMultGlobalFT0CCutPars",
+                                                               std::vector<double>{135.561, -3.7818, 0.0536562, -0.000445155, 1.55429e-06, 38.2336, -1.2568, 0.0270932, -0.000301034, 1.21234e-06},
+                                                               "globalTracks vs FT0C cut parameter values"};
 
-  std::vector<double> multPVT0CCutPars;
-  std::vector<double> multGlobalFT0CPars;
-  std::vector<double> multGlobalPVCutPars;
+    Configurable<std::vector<double>> cfgMultGlobalPVCutPars{"cfgMultGlobalPVCutPars",
+                                                             std::vector<double>{100., -2., 0.05, -0.0003, 1e-06, 30., -1.0, 0.02, -0.0002, 8e-07},
+                                                             "globalTracks vs PV cut parameter values"};
 
-  TF1* fMultPVT0CCutLow  = nullptr;
-  TF1* fMultPVT0CCutHigh = nullptr;
-  TF1* fMultGlobalFT0CCutLow  = nullptr;
-  TF1* fMultGlobalFT0CCutHigh = nullptr;
-  TF1* fMultGlobalPVCutLow  = nullptr;   
-  TF1* fMultGlobalPVCutHigh = nullptr; 
+    std::vector<double> multPVT0CCutPars;
+    std::vector<double> multGlobalFT0CPars;
+    std::vector<double> multGlobalPVCutPars;
 
-} cfgFunCoeff;	  
+    TF1* fMultPVT0CCutLow = nullptr;
+    TF1* fMultPVT0CCutHigh = nullptr;
+    TF1* fMultGlobalFT0CCutLow = nullptr;
+    TF1* fMultGlobalFT0CCutHigh = nullptr;
+    TF1* fMultGlobalPVCutLow = nullptr;
+    TF1* fMultGlobalPVCutHigh = nullptr;
+
+  } cfgFunCoeff;
 
   // CCDB efficiency histograms
   TH1D* efficiency = nullptr;
-  
+
   Filter collisionFilter = nabs(aod::collision::posZ) <= vertexZcut;
-  Filter trackFilter = (nabs(aod::track::eta) < etaCut) && (aod::track::pt > ptMinCut ) && (aod::track::pt < ptMaxCut) && (requireGlobalTrackInFilter());
+  Filter trackFilter = (nabs(aod::track::eta) < etaCut) && (aod::track::pt > ptMinCut) && (aod::track::pt < ptMaxCut) && (requireGlobalTrackInFilter());
 
- using MyCollisionsRun2 = soa::Filtered<soa::Join<aod::Collisions, aod::EvSels, aod::CentRun2V0Ms, aod::Mults>>;
- using MyCollisionRun2 = MyCollisionsRun2::iterator;
+  using MyCollisionsRun2 = soa::Filtered<soa::Join<aod::Collisions, aod::EvSels, aod::CentRun2V0Ms, aod::Mults>>;
+  using MyCollisionRun2 = MyCollisionsRun2::iterator;
 
- using MyCollisionsRun3 = soa::Filtered<soa::Join<aod::Collisions, aod::EvSels, aod::CentFT0Ms, aod::CentFT0Cs, aod::Mults>>;
- using MyCollisionRun3 = MyCollisionsRun3::iterator;
+  using MyCollisionsRun3 = soa::Filtered<soa::Join<aod::Collisions, aod::EvSels, aod::CentFT0Ms, aod::CentFT0Cs, aod::Mults>>;
+  using MyCollisionRun3 = MyCollisionsRun3::iterator;
 
- using MyTracks = soa::Filtered<soa::Join<aod::Tracks, aod::TracksExtra, aod::TracksDCA, aod::TrackSelection>>;
- using MyTrack = MyTracks::iterator;
+  using MyTracks = soa::Filtered<soa::Join<aod::Tracks, aod::TracksExtra, aod::TracksDCA, aod::TrackSelection>>;
+  using MyTrack = MyTracks::iterator;
 
- using MyMCCollisionsRun2 =soa::Filtered<soa::Join<aod::Collisions, aod::EvSels, aod::CentRun2V0Ms, aod::Mults, aod::McCollisionLabels>>;
- using MyMCCollisionRun2 = MyMCCollisionsRun2::iterator;
+  using MyMCCollisionsRun2 = soa::Filtered<soa::Join<aod::Collisions, aod::EvSels, aod::CentRun2V0Ms, aod::Mults, aod::McCollisionLabels>>;
+  using MyMCCollisionRun2 = MyMCCollisionsRun2::iterator;
 
- using MyMCCollisionsRun3 = soa::Filtered<soa::Join<aod::Collisions, aod::EvSels, aod::CentFT0Ms, aod::CentFT0Cs,  aod::Mults, aod::McCollisionLabels>>;
- using MyMCCollisionRun3 = MyMCCollisionsRun3::iterator;
+  using MyMCCollisionsRun3 = soa::Filtered<soa::Join<aod::Collisions, aod::EvSels, aod::CentFT0Ms, aod::CentFT0Cs, aod::Mults, aod::McCollisionLabels>>;
+  using MyMCCollisionRun3 = MyMCCollisionsRun3::iterator;
 
- using MyMCTracks = soa::Filtered<soa::Join<aod::Tracks, aod::TracksExtra, aod::TracksDCA, aod::StoredTracks, aod::TrackSelection, aod::McTrackLabels>>;
- using MyMCTrack = MyMCTracks::iterator;
+  using MyMCTracks = soa::Filtered<soa::Join<aod::Tracks, aod::TracksExtra, aod::TracksDCA, aod::StoredTracks, aod::TrackSelection, aod::McTrackLabels>>;
+  using MyMCTrack = MyMCTracks::iterator;
 
   void init(o2::framework::InitContext&)
   {
@@ -325,44 +325,44 @@ Configurable<std::vector<double>> cfgMultGlobalPVCutPars{  "cfgMultGlobalPVCutPa
 
     cfgFunCoeff.multPVT0CCutPars = cfgFunCoeff.cfgMultPVT0CCutPars;
     cfgFunCoeff.multGlobalFT0CPars = cfgFunCoeff.cfgMultGlobalFT0CCutPars;
-    cfgFunCoeff.multGlobalPVCutPars  = cfgFunCoeff.cfgMultGlobalPVCutPars;
+    cfgFunCoeff.multGlobalPVCutPars = cfgFunCoeff.cfgMultGlobalPVCutPars;
 
-  cfgFunCoeff.fMultPVT0CCutLow =
+    cfgFunCoeff.fMultPVT0CCutLow =
       new TF1("fMultPVT0CCutLow",
               "[0]+[1]*x+[2]*x*x+[3]*x*x*x+[4]*x*x*x*x - 2.0*([5]+[6]*x+[7]*x*x+[8]*x*x*x+[9]*x*x*x*x)",
               0, 100);
-  cfgFunCoeff.fMultPVT0CCutLow->SetParameters(&(cfgFunCoeff.multPVT0CCutPars[0]));
+    cfgFunCoeff.fMultPVT0CCutLow->SetParameters(&(cfgFunCoeff.multPVT0CCutPars[0]));
 
-  cfgFunCoeff.fMultPVT0CCutHigh =
+    cfgFunCoeff.fMultPVT0CCutHigh =
       new TF1("fMultPVT0CCutHigh",
               "[0]+[1]*x+[2]*x*x+[3]*x*x*x+[4]*x*x*x*x + 2.*([5]+[6]*x+[7]*x*x+[8]*x*x*x+[9]*x*x*x*x)",
               0, 100);
-  cfgFunCoeff.fMultPVT0CCutHigh->SetParameters(&(cfgFunCoeff.multPVT0CCutPars[0]));
+    cfgFunCoeff.fMultPVT0CCutHigh->SetParameters(&(cfgFunCoeff.multPVT0CCutPars[0]));
 
-  cfgFunCoeff.fMultGlobalFT0CCutLow =
-    new TF1("fMultGlobalFT0CCutLow",
-            "[0]+[1]*x+[2]*x*x+[3]*x*x*x+[4]*x*x*x*x - 2.*([5]+[6]*x+[7]*x*x+[8]*x*x*x+[9]*x*x*x*x)",
-            0, 100);
-cfgFunCoeff.fMultGlobalFT0CCutLow->SetParameters(&(cfgFunCoeff.multGlobalFT0CPars[0]));
+    cfgFunCoeff.fMultGlobalFT0CCutLow =
+      new TF1("fMultGlobalFT0CCutLow",
+              "[0]+[1]*x+[2]*x*x+[3]*x*x*x+[4]*x*x*x*x - 2.*([5]+[6]*x+[7]*x*x+[8]*x*x*x+[9]*x*x*x*x)",
+              0, 100);
+    cfgFunCoeff.fMultGlobalFT0CCutLow->SetParameters(&(cfgFunCoeff.multGlobalFT0CPars[0]));
 
-cfgFunCoeff.fMultGlobalFT0CCutHigh =
-    new TF1("fMultGlobalFT0CCutHigh",
-            "[0]+[1]*x+[2]*x*x+[3]*x*x*x+[4]*x*x*x*x + 2.*([5]+[6]*x+[7]*x*x+[8]*x*x*x+[9]*x*x*x*x)",
-            0, 100);
-cfgFunCoeff.fMultGlobalFT0CCutHigh->SetParameters(&(cfgFunCoeff.multGlobalFT0CPars[0]));
+    cfgFunCoeff.fMultGlobalFT0CCutHigh =
+      new TF1("fMultGlobalFT0CCutHigh",
+              "[0]+[1]*x+[2]*x*x+[3]*x*x*x+[4]*x*x*x*x + 2.*([5]+[6]*x+[7]*x*x+[8]*x*x*x+[9]*x*x*x*x)",
+              0, 100);
+    cfgFunCoeff.fMultGlobalFT0CCutHigh->SetParameters(&(cfgFunCoeff.multGlobalFT0CPars[0]));
 
-  cfgFunCoeff.fMultGlobalPVCutLow =
+    cfgFunCoeff.fMultGlobalPVCutLow =
       new TF1("fMultGlobalPVCutLow",
-              "[0] + [1]*x - 5.*([2] + [3]*x)",  
+              "[0] + [1]*x - 5.*([2] + [3]*x)",
               0, 100);
-  cfgFunCoeff.fMultGlobalPVCutLow->SetParameters(&(cfgFunCoeff.multGlobalPVCutPars[0]));
+    cfgFunCoeff.fMultGlobalPVCutLow->SetParameters(&(cfgFunCoeff.multGlobalPVCutPars[0]));
 
-  cfgFunCoeff.fMultGlobalPVCutHigh =
+    cfgFunCoeff.fMultGlobalPVCutHigh =
       new TF1("fMultGlobalPVCutHigh",
-              "[0] + [1]*x + 5.*([2] + [3]*x)",  
+              "[0] + [1]*x + 5.*([2] + [3]*x)",
               0, 100);
-  cfgFunCoeff.fMultGlobalPVCutHigh->SetParameters(&(cfgFunCoeff.multGlobalPVCutPars[0]));
-     
+    cfgFunCoeff.fMultGlobalPVCutHigh->SetParameters(&(cfgFunCoeff.multGlobalPVCutPars[0]));
+
     if (cfgLoadEff) {
       ccdb->setURL(cfgUrlCCDB.value);
       ccdb->setCaching(true);
@@ -376,34 +376,34 @@ cfgFunCoeff.fMultGlobalFT0CCutHigh->SetParameters(&(cfgFunCoeff.multGlobalFT0CPa
     }
   }
 
-bool eventSelected(const float& globalNch, const float& pvTrack, const float& centrality)
-{
-  if (cfgFunCoeff.cfgMultPVT0CCutEnabled) {
+  bool eventSelected(const float& globalNch, const float& pvTrack, const float& centrality)
+  {
+    if (cfgFunCoeff.cfgMultPVT0CCutEnabled) {
 
-    if (pvTrack < cfgFunCoeff.fMultPVT0CCutLow->Eval(centrality))
-      return false;
-    if (pvTrack > cfgFunCoeff.fMultPVT0CCutHigh->Eval(centrality))
-      return false;
+      if (pvTrack < cfgFunCoeff.fMultPVT0CCutLow->Eval(centrality))
+        return false;
+      if (pvTrack > cfgFunCoeff.fMultPVT0CCutHigh->Eval(centrality))
+        return false;
+    }
+
+    if (cfgFunCoeff.cfgMultGlobalFT0CCutEnabled) {
+
+      if (globalNch < cfgFunCoeff.fMultGlobalFT0CCutLow->Eval(centrality))
+        return false;
+      if (globalNch > cfgFunCoeff.fMultGlobalFT0CCutHigh->Eval(centrality))
+        return false;
+    }
+
+    if (cfgFunCoeff.cfgMultGlobalPVCutEnabled) {
+
+      if (globalNch < cfgFunCoeff.fMultGlobalPVCutLow->Eval(pvTrack))
+        return false;
+      if (globalNch > cfgFunCoeff.fMultGlobalPVCutHigh->Eval(pvTrack))
+        return false;
+    }
+
+    return true;
   }
-
-  if (cfgFunCoeff.cfgMultGlobalFT0CCutEnabled) {
-
-    if (globalNch < cfgFunCoeff.fMultGlobalFT0CCutLow->Eval(centrality))
-      return false;
-    if (globalNch > cfgFunCoeff.fMultGlobalFT0CCutHigh->Eval(centrality))
-      return false;
-  }
-
-  if (cfgFunCoeff.cfgMultGlobalPVCutEnabled) {
-    
-    if (globalNch < cfgFunCoeff.fMultGlobalPVCutLow->Eval(pvTrack))
-      return false;
-    if (globalNch > cfgFunCoeff.fMultGlobalPVCutHigh->Eval(pvTrack))
-      return false;
-  }
-
-  return true;
-}
 
   template <RunType run, typename C>
   bool selCollision(C const& coll, float& cent, float& mult)
@@ -414,7 +414,7 @@ bool eventSelected(const float& globalNch, const float& pvTrack, const float& ce
     if constexpr (run == kRun3) {
       if (cSel8Trig && !coll.sel8()) {
         return false;
-      } 
+      }
       if (cFT0M) {
         cent = coll.centFT0M(); // centrality for run3 using FT0M
         mult = coll.multFT0M();
@@ -483,7 +483,7 @@ bool eventSelected(const float& globalNch, const float& pvTrack, const float& ce
   {
     if (!track.isGlobalTrack())
       return false;
-    if (cPVcont && !track.isPVContributor()) 
+    if (cPVcont && !track.isPVContributor())
       return false;
     if (std::fabs(track.eta()) >= etaCut)
       return false;
@@ -549,28 +549,29 @@ bool eventSelected(const float& globalNch, const float& pvTrack, const float& ce
     histogramRegistry.fill(HIST("subsample/posneg"), cent, sampleIndex, posneg);
   }
 
-
   template <RunType run, typename C, typename T>
   void calculationData(C const& coll, T const& tracks)
   {
-	  float cent = -1, mult = -1;
+    float cent = -1, mult = -1;
     histogramRegistry.fill(HIST("QA/hVtxZ_before"), coll.posZ());
     if (!selCollision<run>(coll, cent, mult)) {
       return;
     }
-   
-   float globalNch = tracks.size();
-   float pvTrack = coll.multNTracksPV();
+
+    float globalNch = tracks.size();
+    float pvTrack = coll.multNTracksPV();
 
     histogramRegistry.fill(HIST("QA/hCentFT0C"), cent);
-    histogramRegistry.fill(HIST("QA/hNchGlobal"),  globalNch);
-    histogramRegistry.fill(HIST("QA/hNchPV"), pvTrack);  
-       
+    histogramRegistry.fill(HIST("QA/hNchGlobal"), globalNch);
+    histogramRegistry.fill(HIST("QA/hNchPV"), pvTrack);
+
     histogramRegistry.fill(HIST("MultCorrelationPlots/globalTracks_PV_bef"), pvTrack, globalNch);
     histogramRegistry.fill(HIST("MultCorrelationPlots/globalTracks_FT0C_bef"), cent, globalNch);
-    histogramRegistry.fill(HIST("MultCorrelationPlots/PV_FT0C_bef"), cent, pvTrack);  
-    
-    if(cfgEvSelMultCorrelation && !eventSelected(globalNch, pvTrack, cent))  {  return;}
+    histogramRegistry.fill(HIST("MultCorrelationPlots/PV_FT0C_bef"), cent, pvTrack);
+
+    if (cfgEvSelMultCorrelation && !eventSelected(globalNch, pvTrack, cent)) {
+      return;
+    }
     histogramRegistry.fill(HIST("MultCorrelationPlots/globalTracks_PV_aft"), pvTrack, globalNch);
     histogramRegistry.fill(HIST("MultCorrelationPlots/globalTracks_FT0C_aft"), cent, globalNch);
     histogramRegistry.fill(HIST("MultCorrelationPlots/PV_FT0C_aft"), cent, pvTrack);
@@ -613,7 +614,7 @@ bool eventSelected(const float& globalNch, const float& pvTrack, const float& ce
     termp = fpos * (fpos - 1);
     termn = fneg * (fneg - 1);
     posneg = fpos * fneg;
-    
+
     histogramRegistry.fill(HIST("data/cent_nchTotal"), cent, nchTotal);
     histogramRegistry.fill(HIST("data/cent_nchTotalCor"), cent, nchTotalCor);
     histogramRegistry.fill(HIST("data/nch_nchCor"), nch, nchCor);
@@ -638,18 +639,20 @@ bool eventSelected(const float& globalNch, const float& pvTrack, const float& ce
       return;
     }
 
-   int globalNch = inputTracks.size();
-   int pvTrack = coll.multNTracksPV();
+    int globalNch = inputTracks.size();
+    int pvTrack = coll.multNTracksPV();
 
     histogramRegistry.fill(HIST("QA/hCentFT0C"), cent);
-    histogramRegistry.fill(HIST("QA/hNchGlobal"),  globalNch);
-    histogramRegistry.fill(HIST("QA/hNchPV"), pvTrack);  
-       
+    histogramRegistry.fill(HIST("QA/hNchGlobal"), globalNch);
+    histogramRegistry.fill(HIST("QA/hNchPV"), pvTrack);
+
     histogramRegistry.fill(HIST("MultCorrelationPlots/globalTracks_PV_bef"), pvTrack, globalNch);
     histogramRegistry.fill(HIST("MultCorrelationPlots/globalTracks_FT0C_bef"), cent, globalNch);
-    histogramRegistry.fill(HIST("MultCorrelationPlots/PV_FT0C_bef"), cent, pvTrack);  
-    
-    if(cfgEvSelMultCorrelation && !eventSelected(globalNch, pvTrack, cent))  {  return;}
+    histogramRegistry.fill(HIST("MultCorrelationPlots/PV_FT0C_bef"), cent, pvTrack);
+
+    if (cfgEvSelMultCorrelation && !eventSelected(globalNch, pvTrack, cent)) {
+      return;
+    }
     histogramRegistry.fill(HIST("MultCorrelationPlots/globalTracks_PV_aft"), pvTrack, globalNch);
     histogramRegistry.fill(HIST("MultCorrelationPlots/globalTracks_FT0C_aft"), cent, globalNch);
     histogramRegistry.fill(HIST("MultCorrelationPlots/PV_FT0C_aft"), cent, pvTrack);
@@ -775,9 +778,10 @@ bool eventSelected(const float& globalNch, const float& pvTrack, const float& ce
     if (!selCollision<run>(coll, cent, mult))
       return;
 
-   int globalNch = tracks.size();
-   int pvTrack = coll.multNTracksPV();
-   if(cfgEvSelMultCorrelation && !eventSelected(globalNch, pvTrack, cent))    return;
+    int globalNch = tracks.size();
+    int pvTrack = coll.multNTracksPV();
+    if (cfgEvSelMultCorrelation && !eventSelected(globalNch, pvTrack, cent))
+      return;
 
     if (!(cent >= centMin && cent < centMax))
       return;
@@ -852,9 +856,10 @@ bool eventSelected(const float& globalNch, const float& pvTrack, const float& ce
     if (!selCollision<run>(coll, cent, mult))
       return;
 
-   int globalNch = inputTracks.size();
-   int pvTrack = coll.multNTracksPV();
-   if(cfgEvSelMultCorrelation && !eventSelected(globalNch, pvTrack, cent))    return;
+    int globalNch = inputTracks.size();
+    int pvTrack = coll.multNTracksPV();
+    if (cfgEvSelMultCorrelation && !eventSelected(globalNch, pvTrack, cent))
+      return;
 
     if (!(cent >= centMin && cent < centMax))
       return;
