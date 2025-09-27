@@ -18,7 +18,6 @@
 /// \author Nida Malik <nida.malik@cern.ch>
 #include "PWGCF/Core/CorrelationContainer.h"
 #include "PWGCF/Core/PairCuts.h"
-#include <vector> // Include for std::vector
 
 #include "Common/CCDB/EventSelectionParams.h"
 #include "Common/CCDB/TriggerAliases.h"
@@ -29,25 +28,7 @@
 #include "Common/DataModel/FT0Corrected.h"
 #include "Common/DataModel/Multiplicity.h"
 #include "Common/DataModel/PIDResponse.h"
-#include "Common/Core/trackUtilities.h"
-#include "Common/CCDB/EventSelectionParams.h"
-#include "Common/Core/TrackSelection.h"
 #include "Common/DataModel/TrackSelectionTables.h"
-#include "Common/DataModel/Centrality.h"
-#include "CommonConstants/MathConstants.h"
-#include "Common/DataModel/FT0Corrected.h"
-#include "Framework/AnalysisDataModel.h"
-#include "Framework/ASoAHelpers.h"
-#include "Framework/RunningWorkflowInfo.h"
-#include "PWGCF/Core/CorrelationContainer.h"
-#include "PWGCF/Core/PairCuts.h"
-#include "Common/CCDB/TriggerAliases.h"
-#include "Framework/HistogramRegistry.h"
-#include "Framework/O2DatabasePDGPlugin.h"
-#include "CommonConstants/PhysicsConstants.h"
-#include "TProfile.h"
-#include "TProfile2D.h"
-#include "TRandom3.h"
 
 #include "CCDB/BasicCCDBManager.h"
 #include "CommonConstants/MathConstants.h"
@@ -971,10 +952,10 @@ WorkflowSpec defineDataProcessing(ConfigContext const& cfgc)
 {
   return WorkflowSpec{
     {adaptAnalysisTask<NetchargeFluctuations>(cfgc)}};
-    histosMcRecoGen<kRun2>(coll, inputTracks, mcCollisions, mcParticles);
-  }
+  histosMcRecoGen<kRun2>(coll, inputTracks, mcCollisions, mcParticles);
+}
 
-  PROCESS_SWITCH(NetchargeFluctuations, processMcRun2, "Process reconstructed", false);
+PROCESS_SWITCH(NetchargeFluctuations, processMcRun2, "Process reconstructed", false);
 
 }; // struct
 
